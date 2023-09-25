@@ -196,7 +196,10 @@ print('SKOSQuoteLib_EnterMonitorLONG()', skC.SKCenterLib_GetReturnCodeMessage(nC
 
 # 登入海期報價主機，確認 OnConnect 出現 3001 回報後
 # 才可 requesttick
-StockNo ="CBOT,YM2212"
+# 商品名是類似這樣格式 '交易所,代碼YYMM(年份月份)', ex. "CBOT,YM2312"
+# 近月商品為0000，先測這個，減少年月錯誤而找不到商品
+# 報價商品名稱請用 SKOSQuoteLib_GetOverseaProductDetail 查詢
+StockNo = "CBOT,YM0000"
 nCode = skOSQ.SKOSQuoteLib_RequestTicks(0, StockNo)
 print(f"Requesting ticks, {StockNo}", skC.SKCenterLib_GetReturnCodeMessage(nCode[1]))
 
